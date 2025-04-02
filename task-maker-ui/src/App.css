@@ -1,0 +1,52 @@
+.lulu_box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-container {
+  width: 420px;
+  display: flex;
+  justify-content: space-around;
+  gap: 10px; /* Adds spacing between input and button */
+}
+
+ul{
+  /* margin-left: 2.5rem; */
+}
+ul li{
+  width: 400px;
+  display: flex;
+  gap: 5rem;
+
+}
+.task-name {
+  display: block; /* Ensures it behaves like a block element */
+  width: 150px; /* Limit width to prevent shifting */
+  white-space: normal; /* Allows wrapping */
+  word-wrap: break-word; /* Ensures long words wrap */
+  overflow-wrap: break-word; /* Ensures wrapping works properly */
+  padding: 1rem;
+  background-color: antiquewhite;
+  border-radius: 10px;
+  margin: 0.5rem;
+}
+.lulu_input{
+  height: 3rem;
+  width: 20rem;
+  font-size: xx-large;
+  padding: 5px;
+  outline: none
+}
+.delete-btn {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.lulu_task_box{
+  overflow-y: scroll;
+  height: 30rem;
+}
