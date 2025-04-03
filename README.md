@@ -44,7 +44,7 @@ A full-stack task management application built with **React (frontend)**, **Node
 ## **🔹 Backend Setup (Node.js + PostgreSQL)**  
 ### **1️⃣ Clone the Repository**
 ```sh
-git clone https://github.com/Rajesh562020/task-manager-app.git
+git clone -b master https://github.com/Rajesh562020/task-manager-app.git
 cd task-manager-app/task_maker_server
 ```
 
