@@ -19,8 +19,8 @@ A full-stack task management application built with **React (frontend)**, **Node
 ## **📂 Project Structure**  
 ```
 /task-manager-app
-│── /frontend       (React app)
-│── /backend        (Node.js + Express backend)
+│── /task-maker-ui       (React app)
+│── /task_maker_server        (Node.js + Express backend)
 │   │── /lambda     (Local AWS Lambda functions)
 │   │   │── addTask.js
 │   │   │── deleteTask.js
@@ -36,7 +36,7 @@ A full-stack task management application built with **React (frontend)**, **Node
 ## **🛠️ Prerequisites**  
 - **Node.js** (v18+)  
 - **PostgreSQL** (Installed and running)  
-- **pgAdmin 4** (Optional for DB management)  
+- **pgAdmin 4** (for DB management)  
 - **Git**  
 
 ---
@@ -44,8 +44,8 @@ A full-stack task management application built with **React (frontend)**, **Node
 ## **🔹 Backend Setup (Node.js + PostgreSQL)**  
 ### **1️⃣ Clone the Repository**
 ```sh
-git clone https://github.com/your-username/task-manager-app.git
-cd task-manager-app/backend
+git clone https://github.com/Rajesh562020/task-manager-app.git
+cd task-manager-app/task_maker_server
 ```
 
 ### **2️⃣ Install Dependencies**
@@ -58,8 +58,8 @@ npm install
 2. Run the following SQL commands:  
 
 ```sql
-CREATE DATABASE task_manager;
-\c task_manager
+CREATE DATABASE task-manager;
+\c task-manager
 
 CREATE TABLE tasks (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -69,31 +69,10 @@ CREATE TABLE tasks (
 );
 ```
 
-3. **Enable UUID Extension**:
-```sql
-CREATE EXTENSION IF NOT EXISTS "pgcrypto";
-```
-
-4. **Create a trigger for auto-updating `updated_at`:**
-```sql
-CREATE OR REPLACE FUNCTION update_timestamp()
-RETURNS TRIGGER AS $$
-BEGIN
-    NEW.updated_at = CURRENT_TIMESTAMP;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trigger_update_timestamp
-BEFORE UPDATE ON tasks
-FOR EACH ROW
-EXECUTE FUNCTION update_timestamp();
-```
-
 ---
 
 ### **4️⃣ Configure Environment Variables**  
-Create a `.env` file inside `/backend` and update it with your PostgreSQL credentials:
+Create a `.env` file inside `/task_maker_server` and update it with your PostgreSQL credentials:
 
 ```
 PG_HOST=localhost
@@ -107,7 +86,7 @@ PG_DATABASE=task_manager
 
 ### **5️⃣ Start the Backend Server**
 ```sh
-node server.js
+node index.js
 ```
 If everything is set up correctly, you should see:  
 `Server running on port 5000`
@@ -117,7 +96,7 @@ If everything is set up correctly, you should see:
 ## **🔹 Frontend Setup (React.js)**  
 ### **1️⃣ Navigate to the Frontend Directory**
 ```sh
-cd ../frontend
+cd ../task-maker-ui
 ```
 
 ### **2️⃣ Install Dependencies**
@@ -161,17 +140,6 @@ curl -X DELETE "http://localhost:5000/tasks/your-task-id"
 
 ---
 
-## **🌍 Deployment (Optional)**
-### **Frontend Deployment (Vercel/Netlify)**
-- Deploy via **Vercel** → `vercel --prod`
-- Deploy via **Netlify** → `netlify deploy`
-
-### **Backend Deployment (Railway/Render)**
-- Deploy via **Railway.app** → `railway up`
-- Deploy via **Render.com**
-
----
-
 ## **❓ Troubleshooting**
 **1️⃣ PostgreSQL connection error?**  
 - Ensure the database is running:  
@@ -183,7 +151,7 @@ curl -X DELETE "http://localhost:5000/tasks/your-task-id"
 **2️⃣ Backend not responding?**  
 - Restart the server:  
   ```sh
-  node server.js
+  node index.js
   ```
 
 **3️⃣ Frontend not fetching data?**  
