@@ -86,7 +86,7 @@ PG_DATABASE=task_manager
 
 ### **5️⃣ Start the Backend Server**
 ```sh
-node index.js
+node index.js or npm start
 ```
 If everything is set up correctly, you should see:  
 `Server running on port 5000`
@@ -105,7 +105,7 @@ npm install
 ```
 
 ### **3️⃣ Update API Endpoint**  
-Inside `frontend/src/App.js`, update the backend API URL:
+Inside `task-maker-ui/src/App.js`, update the backend API URL:
 ```javascript
 const API_URL = "http://localhost:5000/tasks";
 ```
