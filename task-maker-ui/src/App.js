@@ -9,28 +9,41 @@ function App() {
   const [newTask, setNewTask] = useState("");
 
   useEffect(() => {
-    axios.get(API_URL).then((res) => 
-    {
-      console.log(">>>>",res)
-      setTasks(res.data);
- 
-    }
-    
-    );
+    const fetchTasks = async () => {
+      try {
+        const res = await axios.get(API_URL);
+        setTasks(res.data);
+      } catch (error) {
+        console.error('Failed to fetch tasks:', error);
+        alert('Failed to load tasks. Please refresh the page.');
+      }
+    };
+
+    fetchTasks();
   }, []);
 
   const addTask = async () => {
     if(newTask !== ''){
-      const res = await axios.post(API_URL, { task_name: newTask });
-      setTasks([...tasks, res.data]);
-      setNewTask("");
+      try {
+        const res = await axios.post(API_URL, { task_name: newTask });
+        setTasks([...tasks, res.data]);
+        setNewTask("");
+      } catch (error) {
+        console.error('Failed to add task:', error);
+        // You could add a user notification here, like:
+        alert('Failed to add task. Please try again.');
+      }
     }
-    
   };
 
   const deleteTask = async (id) => {
-    await axios.delete(`${API_URL}/${id}`);
-    setTasks(tasks.filter((task) => task.id !== id));
+    try {
+      await axios.delete(`${API_URL}/${id}`);
+      setTasks(tasks.filter((task) => task.id !== id));
+    } catch (error) {
+      console.error('Failed to delete task:', error);
+      alert('Failed to delete task. Please try again.');
+    }
   };
 
   return (
